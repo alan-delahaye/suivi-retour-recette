@@ -13,17 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package fr.gfi.alan.delahaye;
+package fr.gfi.alan.delahaye.actions;
+
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 
+import fr.gfi.alan.delahaye.beans.UtilisateurBean;
+
 @Conversion()
-public class HelloWorldAction extends ActionSupport {
+public class HelloWorldAction extends ActionSupport implements SessionAware {
     
 	/**
 	 * 
@@ -32,10 +38,12 @@ public class HelloWorldAction extends ActionSupport {
 
 	private Logger logger = LogManager.getLogger(HelloWorldAction.class);
 	
+	private SessionMap<String, Object> sessionMap;
+	
     private String motDePasse;
     private String identifiant;
     
-    
+    private UtilisateurBean utilisateurBean;
     
     public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
     public String getMotDePasse() { return motDePasse; }
@@ -58,8 +66,35 @@ public class HelloWorldAction extends ActionSupport {
     	}	
     }
     
+    
+    
     public String execute() throws Exception {
     	logger.warn("Phase d'initialisation");
+    	// TODO : Récupérer par un Manager
+    	utilisateurBean = new UtilisateurBean();
+    	utilisateurBean.setNom("Delahaye");
+    	utilisateurBean.setPrenom("Alan");
+    	utilisateurBean.setAdresseMail("alan.delahaye@gfi.fr");
+    	
+    	sessionMap.put("utilisateur", utilisateurBean);
+    	
         return SUCCESS;
     }
+    
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		sessionMap = (SessionMap<String, Object>) arg0;
+	}
+	/**
+	 * @return the utilisateurBean
+	 */
+	public UtilisateurBean getUtilisateurBean() {
+		return utilisateurBean;
+	}
+	/**
+	 * @param utilisateurBean the utilisateurBean to set
+	 */
+	public void setUtilisateurBean(UtilisateurBean utilisateurBean) {
+		this.utilisateurBean = utilisateurBean;
+	}
 }

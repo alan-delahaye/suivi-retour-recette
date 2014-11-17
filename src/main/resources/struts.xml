@@ -12,11 +12,11 @@
 
         <default-action-ref name="index" />
 
-        <action name="index" class="fr.gfi.alan.delahaye.IndexAction">
+        <action name="index" class="fr.gfi.alan.delahaye.actions.IndexAction">
             <result>/jsp/index.jsp</result>
         </action>
 
-        <action name="helloWorld" class="fr.gfi.alan.delahaye.HelloWorldAction">
+        <action name="helloWorld" class="fr.gfi.alan.delahaye.actions.HelloWorldAction">
             <result name="input">/jsp/index.jsp</result>
             <result>/jsp/helloWorld.jsp</result>
         </action>

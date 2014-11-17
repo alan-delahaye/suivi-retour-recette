@@ -49,9 +49,9 @@
 		        <h2 class="form-login-heading">Connexion à l'application</h2>
 		        <div class="login-wrap">
 		        	<s:actionerror/>
-		        	<s:textfield label="Identifiant" cssClass="form-control" name="identifiant" placeholder="Mon identifiant"/>
+		        	<s:textfield label="Identifiant" cssClass="form-control" name="identifiant" placeholder="Mon identifiant" value="%{identifiant}"/>
 		        	<br>
-					<s:textfield label="Mot de passe" cssClass="form-control" name="motDePasse" placeholder="Mon mot de passe"/>
+					<s:password label="Mot de passe" cssClass="form-control" name="motDePasse" placeholder="Mon mot de passe"/>
 					<br>
 		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Connexion</button>
 		        </div>

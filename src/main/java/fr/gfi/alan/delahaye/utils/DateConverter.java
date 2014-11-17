@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package fr.gfi.alan.delahaye;
+package fr.gfi.alan.delahaye.utils;
 
 import org.apache.struts2.util.StrutsTypeConverter;
 
