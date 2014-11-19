@@ -15,21 +15,19 @@
  */
 package fr.gfi.alan.delahaye.actions.tdb;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 
+import fr.gfi.alan.delahaye.actions.ParentStructsAction;
 import fr.gfi.alan.delahaye.beans.UtilisateurBean;
 
 @Conversion()
-public class DashboardAction extends ActionSupport implements SessionAware {
+public class DashboardAction extends ParentStructsAction {
     
 	/**
 	 * 
@@ -38,53 +36,31 @@ public class DashboardAction extends ActionSupport implements SessionAware {
 
 	private Logger logger = LogManager.getLogger(DashboardAction.class);
 	
-	private SessionMap<String, Object> sessionMap;
-	
-    private String motDePasse;
-    private String identifiant;
-    
     private UtilisateurBean utilisateurBean;
     
-    public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
-    public String getMotDePasse() { return motDePasse; }
-   
-    public void setIdentifiant(String identifiant) { this.identifiant = identifiant; }
-    public String getIdentifiant() { return this.identifiant; }
+    private List<UtilisateurBean> tousLesUtilisateurs;
     
-    @Override
-    public void validate() {
-    	logger.warn("Je suis dans le validate");
-    	if(StringUtils.isEmpty(identifiant)){
-    		addActionError("Le nom d'utilisateur est obligatoire.");
-    	}
-    	if(StringUtils.isEmpty(motDePasse)){
-    		addActionError("Le mot de passe est obligatoire.");
-    	}
-    	 // Validation de l'utilisateur et du mot de passe :
-    	if(!hasErrors() && (!"alan".equals(identifiant) || !"alan".equals(motDePasse))){
-    		addActionError("Le couple utilisateur/mot de passe n'est pas correct.");    		
-    	}	
-    }
-    
-    
-    
-    public String execute() throws Exception {
+   public String execute() throws Exception {
     	logger.warn("Phase d'initialisation");
-    	// TODO : Récupérer par un Manager
-    	utilisateurBean = new UtilisateurBean();
-    	utilisateurBean.setNom("Delahaye");
-    	utilisateurBean.setPrenom("Alan");
-    	utilisateurBean.setAdresseMail("alan.delahaye@gfi.fr");
-    	
-    	sessionMap.put("utilisateur", utilisateurBean);
+    	if(sessionMap.get("utilisateur") == null){
+	    	return LOGIN;
+    	}
+    	//TODO:Récupération par un manager
+    	tousLesUtilisateurs = new ArrayList<UtilisateurBean>();
+    	UtilisateurBean bean = new UtilisateurBean("Defrance","Vincent","Chef de Projet");
+    	tousLesUtilisateurs.add(bean);
+    	bean = new UtilisateurBean("Delahaye","Alan","Responsable Intégration");
+    	tousLesUtilisateurs.add(bean);
+    	bean = new UtilisateurBean("Medjoudj","Abderezak","Responsable Développements");
+    	tousLesUtilisateurs.add(bean);
+    	bean = new UtilisateurBean("Collet","François","Responsable Recettes");
+    	tousLesUtilisateurs.add(bean);
+    	bean = new UtilisateurBean("Vion","Jean-François","Backup Resp. Intégration");
+    	tousLesUtilisateurs.add(bean);
     	
         return SUCCESS;
     }
     
-	@Override
-	public void setSession(Map<String, Object> arg0) {
-		sessionMap = (SessionMap<String, Object>) arg0;
-	}
 	/**
 	 * @return the utilisateurBean
 	 */
@@ -96,5 +72,19 @@ public class DashboardAction extends ActionSupport implements SessionAware {
 	 */
 	public void setUtilisateurBean(UtilisateurBean utilisateurBean) {
 		this.utilisateurBean = utilisateurBean;
+	}
+
+	/**
+	 * @return the tousLesUtilisateurs
+	 */
+	public List<UtilisateurBean> getTousLesUtilisateurs() {
+		return tousLesUtilisateurs;
+	}
+
+	/**
+	 * @param tousLesUtilisateurs the tousLesUtilisateurs to set
+	 */
+	public void setTousLesUtilisateurs(List<UtilisateurBean> tousLesUtilisateurs) {
+		this.tousLesUtilisateurs = tousLesUtilisateurs;
 	}
 }

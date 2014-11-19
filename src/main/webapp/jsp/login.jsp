@@ -28,24 +28,10 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
 
-<!-- 	  <div id="login-page"> -->
-<!-- 	  	<div class="container"> -->
-<%-- 	  		  <s:form action="helloWorld" class="form-login"> --%>
-<!-- 		        <h2 class="form-login-heading">Connexion à l'application</h2> -->
-<!-- 		        <div class="login-wrap"> -->
-<%-- 		        	<s:textfield label="Identifiant : " name="name" placeholder="Mon identifiant"/> --%>
-<%-- 					<s:textfield label="Mot de passe" name="dateNow" placeholder="Mon mot de passe"/> --%>
-<%-- 					<s:submit class="btn btn-theme btn-block"><i class="fa fa-lock"></i>Connexion</s:submit>    --%>
-<!-- 		            <hr>		 -->
-<!-- 		        </div> -->
-<%-- 	  		  </s:form> --%>
-<!-- 	  	</div> -->
-<!-- 	  </div> -->
-
 <div id="login-page">
 	  	<div class="container">
 	  	
-		      <s:form cssClass="form-login" action="helloWorld" theme="simple">
+		      <s:form cssClass="form-login" action="validateLogin" theme="simple">
 		        <h2 class="form-login-heading">Connexion à l'application</h2>
 		        <div class="login-wrap">
 		        	<s:actionerror/>

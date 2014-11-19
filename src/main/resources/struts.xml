@@ -16,9 +16,18 @@
             <result>/jsp/login.jsp</result>
         </action>
 
-        <action name="helloWorld" class="fr.gfi.alan.delahaye.actions.tdb.DashboardAction">
+        <action name="validateLogin" class="fr.gfi.alan.delahaye.actions.ValidateLoginAction">
             <result name="input">/jsp/login.jsp</result>
+            <result type="redirectAction">dashboard</result>
+        </action>
+
+		<action name="dashboard" class="fr.gfi.alan.delahaye.actions.tdb.DashboardAction" method="execute">
+            <result name="login" type="redirectAction">login.do</result>
             <result>/jsp/tdb/dashboard.jsp</result>
+        </action>
+		
+		<action name="logout" class="fr.gfi.alan.delahaye.actions.LoginAction" method="deconnexion">
+            <result name="success">/jsp/login.jsp</result>
         </action>
 
     </package>

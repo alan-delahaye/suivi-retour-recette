@@ -15,30 +15,21 @@
  */
 package fr.gfi.alan.delahaye.actions;
 
-import java.util.Map;
-
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import fr.gfi.alan.delahaye.beans.UtilisateurBean;
 
 /**
  * 
  */
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ParentStructsAction {
     
-	private String identifiant;
-	
-	private String motDePasse;
-	
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 352261149790704498L;
 
-	private SessionMap<String, Object> sessionMap;
+	private String identifiant;
+	
+	private String motDePasse;
 	
 	public String execute() throws Exception {
 		if(sessionMap != null){
@@ -49,11 +40,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		}
         return SUCCESS;
     }
-
-	@Override
-	public void setSession(Map<String, Object> arg0) {
-		sessionMap = (SessionMap<String, Object>) arg0;
-	}
+	
+	public String deconnexion() throws Exception {
+		if(sessionMap != null){
+			sessionMap.clear();
+		}
+        return SUCCESS;
+    }
 
 	/**
 	 * @return the identifiant

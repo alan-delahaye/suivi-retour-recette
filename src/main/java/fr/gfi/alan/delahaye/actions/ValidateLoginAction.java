@@ -15,30 +15,20 @@
  */
 package fr.gfi.alan.delahaye.actions;
 
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.conversion.annotations.Conversion;
 
 import fr.gfi.alan.delahaye.beans.UtilisateurBean;
 
-@Conversion()
-public class HelloWorldAction extends ActionSupport implements SessionAware {
+public class ValidateLoginAction extends ParentStructsAction {
     
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8273807414373813773L;
+	private static final long serialVersionUID = -8947830421648562653L;
 
-	private Logger logger = LogManager.getLogger(HelloWorldAction.class);
-	
-	private SessionMap<String, Object> sessionMap;
+	private Logger logger = LogManager.getLogger(ValidateLoginAction.class);
 	
     private String motDePasse;
     private String identifiant;
@@ -81,10 +71,6 @@ public class HelloWorldAction extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
     
-	@Override
-	public void setSession(Map<String, Object> arg0) {
-		sessionMap = (SessionMap<String, Object>) arg0;
-	}
 	/**
 	 * @return the utilisateurBean
 	 */

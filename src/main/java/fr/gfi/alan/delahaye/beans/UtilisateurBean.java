@@ -17,6 +17,18 @@ public class UtilisateurBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1610290526088335208L;
 
+	public UtilisateurBean() {
+		super();
+	}
+
+	public UtilisateurBean(String nom, String prenom, String adresseMail) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresseMail = adresseMail;
+	}
+
+
+
 	/**
 	 * Nom de l'utilisateur
 	 */
