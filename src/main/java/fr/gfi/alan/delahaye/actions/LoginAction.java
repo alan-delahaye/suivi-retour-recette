@@ -27,7 +27,7 @@ import fr.gfi.alan.delahaye.beans.UtilisateurBean;
 /**
  * 
  */
-public class IndexAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ActionSupport implements SessionAware {
     
 	private String identifiant;
 	
@@ -41,9 +41,11 @@ public class IndexAction extends ActionSupport implements SessionAware {
 	private SessionMap<String, Object> sessionMap;
 	
 	public String execute() throws Exception {
-		UtilisateurBean utilisateurBean = (UtilisateurBean) sessionMap.get("utilisateur");
-		if(utilisateurBean != null){
-			identifiant = utilisateurBean.getPrenom();
+		if(sessionMap != null){
+			UtilisateurBean utilisateurBean = (UtilisateurBean) sessionMap.get("utilisateur");
+			if(utilisateurBean != null){
+				identifiant = utilisateurBean.getPrenom();
+			}
 		}
         return SUCCESS;
     }

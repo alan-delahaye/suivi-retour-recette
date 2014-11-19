@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 
 import com.opensymphony.xwork2.Action;
 
-import fr.gfi.alan.delahaye.actions.IndexAction;
+import fr.gfi.alan.delahaye.actions.LoginAction;
 
 /**
  * 
@@ -27,7 +27,7 @@ import fr.gfi.alan.delahaye.actions.IndexAction;
 public class IndexActionTest extends TestCase {
     
     public void testIndexAction() throws Exception {
-        IndexAction action = new IndexAction();
+        LoginAction action = new LoginAction();
         String result = action.execute();
         assertEquals(Action.SUCCESS, result);
     }
