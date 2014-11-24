@@ -42,7 +42,8 @@ public class DashboardAction extends ParentStructsAction {
     
    public String execute() throws Exception {
     	logger.warn("Phase d'initialisation");
-    	if(sessionMap.get("utilisateur") == null){
+    	utilisateurBean = (UtilisateurBean) sessionMap.get("utilisateur");
+    	if(utilisateurBean == null){
 	    	return LOGIN;
     	}
     	//TODO:Récupération par un manager

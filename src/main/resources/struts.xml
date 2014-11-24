@@ -21,9 +21,38 @@
             <result type="redirectAction">dashboard</result>
         </action>
 
-		<action name="dashboard" class="fr.gfi.alan.delahaye.actions.tdb.DashboardAction" method="execute">
+		<action name="dashboard" class="fr.gfi.alan.delahaye.actions.tdb.DashboardAction">
             <result name="login" type="redirectAction">login.do</result>
             <result>/jsp/tdb/dashboard.jsp</result>
+        </action>
+		
+		<action name="administration" class="fr.gfi.alan.delahaye.actions.administration.AdministrationAction">
+            <result name="login" type="redirectAction">login.do</result>
+            <result>/jsp/administration/administration.jsp</result>
+        </action>
+		
+		<action name="monCompte" class="fr.gfi.alan.delahaye.actions.administration.MonCompteAction">
+            <result name="login" type="redirectAction">login.do</result>
+            <result>/jsp/administration/monCompte.jsp</result>
+        </action>
+        
+        <action name="gestionUtilisateurs" class="fr.gfi.alan.delahaye.actions.administration.GestionUtilisateursAction">
+            <result name="login" type="redirectAction">login.do</result>
+            <result>/jsp/administration/gestionUtilisateurs.jsp</result>
+        </action>
+        
+        <action name="gestionPerimetres" class="fr.gfi.alan.delahaye.actions.administration.GestionPerimetresAction">
+            <result name="login" type="redirectAction">login.do</result>
+            <result>/jsp/administration/gestionPerimetres.jsp</result>
+        </action>
+        
+        <action name="export" class="fr.gfi.alan.delahaye.actions.administration.ExportAction">
+            <result name="login" type="redirectAction">login.do</result>
+            <result>/jsp/administration/export.jsp</result>
+        </action>
+         <action name="perimetre" class="fr.gfi.alan.delahaye.actions.perimetre.PerimetreAction">
+            <result name="login" type="redirectAction">login.do</result>
+            <result>/jsp/perimetre/perimetre.jsp</result>
         </action>
 		
 		<action name="logout" class="fr.gfi.alan.delahaye.actions.LoginAction" method="deconnexion">
