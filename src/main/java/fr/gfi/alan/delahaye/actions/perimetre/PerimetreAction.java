@@ -31,35 +31,14 @@ public class PerimetreAction extends ParentStructsAction {
 
 	private Logger logger = LogManager.getLogger(AdministrationAction.class);
 
-	private UtilisateurBean utilisateurBean;
-
-	private List<UtilisateurBean> tousLesUtilisateurs;
-
 	private Map<String, List<PerimetreBean>> tousLesPerimetres;
 	
 	public String execute() throws Exception {
+		super.init();
 		logger.warn("Phase d'initialisation");
-		utilisateurBean = (UtilisateurBean) sessionMap.get("utilisateur");
-		if (utilisateurBean == null) {
+		if (getUtilisateurBean() == null) {
 			return LOGIN;
 		}
-		// TODO:Récupération par un manager
-		tousLesUtilisateurs = new ArrayList<UtilisateurBean>();
-		UtilisateurBean bean = new UtilisateurBean("Defrance", "Vincent",
-				"Chef de Projet");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Delahaye", "Alan",
-				"Responsable Intégration");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Medjoudj", "Abderezak",
-				"Responsable Développements");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Collet", "François", "Responsable Recettes");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Vion", "Jean-François",
-				"Backup Resp. Intégration");
-		tousLesUtilisateurs.add(bean);
-
 		//TODO Récupération par un manager
 		tousLesPerimetres = new HashMap<String, List<PerimetreBean>>();
 		List<PerimetreBean> perimetreBeans = new ArrayList<PerimetreBean>();
@@ -81,36 +60,6 @@ public class PerimetreAction extends ParentStructsAction {
 		tousLesPerimetres.put("2", perimetreBeans);
 		
 		return SUCCESS;
-	}
-	
-	/**
-	 * @return the utilisateurBean
-	 */
-	public UtilisateurBean getUtilisateurBean() {
-		return utilisateurBean;
-	}
-
-	/**
-	 * @param utilisateurBean
-	 *            the utilisateurBean to set
-	 */
-	public void setUtilisateurBean(UtilisateurBean utilisateurBean) {
-		this.utilisateurBean = utilisateurBean;
-	}
-
-	/**
-	 * @return the tousLesUtilisateurs
-	 */
-	public List<UtilisateurBean> getTousLesUtilisateurs() {
-		return tousLesUtilisateurs;
-	}
-
-	/**
-	 * @param tousLesUtilisateurs
-	 *            the tousLesUtilisateurs to set
-	 */
-	public void setTousLesUtilisateurs(List<UtilisateurBean> tousLesUtilisateurs) {
-		this.tousLesUtilisateurs = tousLesUtilisateurs;
 	}
 
 	/**
