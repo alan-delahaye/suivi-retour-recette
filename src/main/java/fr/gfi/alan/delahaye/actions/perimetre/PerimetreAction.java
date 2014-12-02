@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -16,7 +14,6 @@ import org.apache.log4j.Logger;
 import fr.gfi.alan.delahaye.actions.ParentStructsAction;
 import fr.gfi.alan.delahaye.actions.administration.AdministrationAction;
 import fr.gfi.alan.delahaye.beans.PerimetreBean;
-import fr.gfi.alan.delahaye.beans.UtilisateurBean;
 
 /**
  * @author adelahaye
@@ -39,23 +36,23 @@ public class PerimetreAction extends ParentStructsAction {
 		if (getUtilisateurBean() == null) {
 			return LOGIN;
 		}
-		//TODO Récupération par un manager
+		// TODO
 		tousLesPerimetres = new HashMap<String, List<PerimetreBean>>();
 		List<PerimetreBean> perimetreBeans = new ArrayList<PerimetreBean>();
-		PerimetreBean perimetreBean = new PerimetreBean("Lot 3 P1");
+		PerimetreBean perimetreBean = new PerimetreBean("Lot 3 P1",100, 20,20,25);
 		perimetreBeans.add(perimetreBean);
-		perimetreBean = new PerimetreBean("Lot 3 P2");
+		perimetreBean = new PerimetreBean("Lot 3 P2",200, 40,40,25);
 		perimetreBeans.add(perimetreBean);
-		perimetreBean = new PerimetreBean("Lot 3 P3");
+		perimetreBean = new PerimetreBean("Lot 3 P3",100, 20,20,25);
 		perimetreBeans.add(perimetreBean);
-		perimetreBean = new PerimetreBean("Lot 3 P4");
+		perimetreBean = new PerimetreBean("Lot 3 P4",200, 40,40,25);
 		perimetreBeans.add(perimetreBean);
 		tousLesPerimetres.put("1", perimetreBeans);
 		
 		perimetreBeans = new ArrayList<PerimetreBean>();
-		perimetreBean = new PerimetreBean("Lot 4 P1");
+		perimetreBean = new PerimetreBean("Lot 4 P1",100, 20,20,25);
 		perimetreBeans.add(perimetreBean);
-		perimetreBean = new PerimetreBean("Lot 4 P2");
+		perimetreBean = new PerimetreBean("Lot 4 P2",200, 40,40,25);
 		perimetreBeans.add(perimetreBean);
 		tousLesPerimetres.put("2", perimetreBeans);
 		

@@ -2,11 +2,12 @@
 	"-//W3C//DTD XHTML 1.1 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="gore" tagdir="/WEB-INF/tags/"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Administration</title>
+<title>Administration - Export</title>
 <s:head />
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
@@ -29,136 +30,25 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<!-- Création des liens de la page -->
-<s:url var="logout" action="logout" />
-<s:url var="index" action="dashboard" />
-<s:url var="admin" action="administration" />
-<s:url var="perimetre" action="perimetre" />
+<gore:urls />
+
 </head>
 
 <body>
-	<section id="container"> <!-- **********************************************************************************************************************************************************
+	<section id="container"> 
+	<!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
-	<!--header start--> <header class="header black-bg"> <!--<div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>--> <!--logo start-->
-	<div style="float: left;">
-		<a href="${index}" class="logo"><img src="img/Gfi_logo.png" /><b>GORE
-				- Gestion Opérationnelle des REtours sur recettes</b></a>
-	</div>
-	<!--logo end-->
-
-	<div class="nav notify-row" id="top_menu"
-		style="margin-top: 35px; margin-left: 15px;">
-		<!--  notification start -->
-		<ul class="nav top-menu">
-			<!-- settings start -->
-			<li class="dropdown"><a data-toggle="dropdown"
-				class="dropdown-toggle" href="index.html#"> <i
-					class="fa fa-tasks"></i> <span class="badge bg-theme">4</span>
-			</a>
-				<ul class="dropdown-menu extended tasks-bar">
-					<div class="notify-arrow notify-arrow-green"></div>
-					<li>
-						<p class="green">4 périmètres non finalisés</p>
-					</li>
-					<li><a href="index.html#">
-							<div class="task-info">
-								<div class="desc">Lot 3 P1</div>
-								<div class="percent">90%</div>
-							</div>
-							<div class="progress progress-striped">
-								<div class="progress-bar progress-bar-info" role="progressbar"
-									aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-									style="width: 90%">
-									<span class="sr-only">90% Complete</span>
-								</div>
-							</div>
-					</a></li>
-					<li><a href="index.html#">
-							<div class="task-info">
-								<div class="desc">Lot 3 P2</div>
-								<div class="percent">80%</div>
-							</div>
-							<div class="progress progress-striped">
-								<div class="progress-bar progress-bar-info" role="progressbar"
-									aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-									style="width: 80%">
-									<span class="sr-only">80% Complete</span>
-								</div>
-							</div>
-					</a></li>
-					<li><a href="index.html#">
-							<div class="task-info">
-								<div class="desc">Lot 3 P3</div>
-								<div class="percent">60%</div>
-							</div>
-							<div class="progress progress-striped">
-								<div class="progress-bar progress-bar-warning"
-									role="progressbar" aria-valuenow="60" aria-valuemin="0"
-									aria-valuemax="100" style="width: 60%">
-									<span class="sr-only">60% Complete</span>
-								</div>
-							</div>
-					</a></li>
-					<li><a href="index.html#">
-							<div class="task-info">
-								<div class="desc">Lot 3 P4</div>
-								<div class="percent">10%</div>
-							</div>
-							<div class="progress progress-striped">
-								<div class="progress-bar progress-bar-danger" role="progressbar"
-									aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
-									style="width: 10%">
-									<span class="sr-only">10% Complete (Important)</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="external"><a href="#">Voir tous les périmètres</a>
-					</li>
-				</ul></li>
-			<!-- settings end -->
-		</ul>
-		<!--  notification end -->
-	</div>
-
-	<div class="top-menu" style="margin-top: 15px;">
-		<ul class="nav pull-right top-menu">
-			<li><a class="logout" href="${logout}">Déconnexion</a></li>
-		</ul>
-		<!-- <div style="float:right; margin-top:20px; margin-right:5px;"><b>Alan Delahaye - Responsable</b></div> -->
-	</div>
-
-	</header> <!--header end--> <!-- **********************************************************************************************************************************************************
+	
+	<gore:header />
+	
+	<!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
-	<!--sidebar start--> <aside>
-	<div id="sidebar" class="nav-collapse " style="margin-top: 40px;">
-		<!-- sidebar menu start-->
-		<ul class="sidebar-menu" id="nav-accordion">
+	
+	<gore:menu elementMenu="administration"/>
 
-			<p class="centered">
-				<a href="profile.html"><img src="img/ui-sam.jpg"
-					class="img-circle" width="60"></a>
-			</p>
-			<h5 class="centered">${utilisateurBean.prenom}
-				${utilisateurBean.nom}</h5>
-
-			<li class="mt"><a href="${index}"> <i
-					class="fa fa-dashboard"></i> <span>Tableau de bord</span>
-			</a></li>
-
-			<li class="mt"><a href="${perimetre}"> <i class="fa fa-desktop"></i> <span>Saisie
-						des informations</span>
-			</a></li>
-
-			<li class="mt"><a href="${admin}" class="active"> <i class="fa fa-cogs"></i> <span>Administration</span>
-			</a></li>
-		</ul>
-		<!-- sidebar menu end-->
-	</div>
-	</aside> <!--sidebar end--> <!-- **********************************************************************************************************************************************************
+	<!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
 	<!--main content start--> <section id="main-content"> <section
@@ -179,67 +69,13 @@
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->
 
-		<div class="col-lg-3 ds" style="margin-top: 40px;">
-			<!--COMPLETED ACTIONS DONUTS CHART-->
-			<h3>Notifications</h3>
+		<gore:notifications />
 
-			<!-- First Action -->
-			<div class="desc">
-				<div class="thumb">
-					<span class="badge bg-theme" style="background-color: #68DF4A"><i
-						class="fa fa-clock-o"></i></span>
-				</div>
-				<div class="details">
-					<p>
-						<muted>15/11/2014</muted>
-						<br /> Le périmètre <a href="#">Lot 5</a> a été finalisé.<br />
-					</p>
-				</div>
-			</div>
-			<!-- Second Action -->
-			<div class="desc">
-				<div class="thumb">
-					<span class="badge bg-theme" style="background-color: #FF0000"><i
-						class="fa fa-clock-o"></i></span>
-				</div>
-				<div class="details">
-					<p>
-						<muted>14/11/2014</muted>
-						<br /> ATTENTION : Le périmètre <a href="#">Lot 3 P4</a> est à
-						surveillé.<br />
-					</p>
-				</div>
-			</div>
+	</section> </section> 
+	
+	<gore:footer />
 
-			<!-- USERS ONLINE SECTION -->
-			<h3>Membres de l'équipe</h3>
-			<!-- First Member -->
-			<s:iterator value="tousLesUtilisateurs">
-				<div class="desc">
-					<div class="thumb">
-						<img class="img-circle" src="img/ui-sam.jpg" width="35px"
-							height="35px" align="">
-					</div>
-					<div class="details">
-						<p>
-							<a><s:property value="nom" /> <s:property value="prenom" /></a><br />
-							<muted>
-							<s:property value="adresseMail" /></muted>
-						</p>
-					</div>
-				</div>
-			</s:iterator>
-		</div>
-		<!-- /col-lg-3 -->
-	</div>
-	<! --/row --> </section> </section> <!--main content end--> <!--footer start--> <footer
-		class="site-footer">
-	<div class="text-center">
-		2014 - Alvarez.is - Développements : Alan Delahaye <a
-			href="index.html#" class="go-top"> <i class="fa fa-angle-up"></i>
-		</a>
-	</div>
-	</footer> <!--footer end--> </section>
+	</section>
 
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>

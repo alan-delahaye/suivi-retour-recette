@@ -17,18 +17,6 @@ public class UtilisateurBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1610290526088335208L;
 
-	public UtilisateurBean() {
-		super();
-	}
-
-	public UtilisateurBean(String nom, String prenom, String adresseMail) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresseMail = adresseMail;
-	}
-
-
-
 	/**
 	 * Nom de l'utilisateur
 	 */
@@ -43,6 +31,45 @@ public class UtilisateurBean implements Serializable {
 	 * Adresse mail de l'utilisateur
 	 */
 	private String adresseMail;
+	
+	/**
+	 * Fonction de l'utilisateur
+	 */
+	private String fonction;
+	
+	/**
+	 * Numero de téléphone de l'utilisateur
+	 */
+	private String numeroTelephone;
+	
+	public UtilisateurBean() {
+		super();
+	}
+	
+	public UtilisateurBean(String nom, String prenom, String adresseMail, String fonction, String numeroTelephone) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresseMail = adresseMail;
+		this.fonction = fonction;
+		this.numeroTelephone = numeroTelephone;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("UtilisateurBean :  [");
+		stringBuilder.append(nom);
+		stringBuilder.append(" ");
+		stringBuilder.append(prenom);
+		stringBuilder.append(" - ");
+		stringBuilder.append(fonction);
+		stringBuilder.append("][@ ");
+		stringBuilder.append(adresseMail);
+		stringBuilder.append("][Tél. ");
+		stringBuilder.append(numeroTelephone);
+		stringBuilder.append("]");
+		return stringBuilder.toString();
+	}
 	
 	/**
 	 * @return the nom
@@ -81,10 +108,32 @@ public class UtilisateurBean implements Serializable {
 		this.adresseMail = adresseMail;
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Utilisateur :  [" + nom + " " + prenom + " - " + adresseMail + "]");
-		return stringBuilder.toString();
+
+	/**
+	 * @return the fonction
+	 */
+	public String getFonction() {
+		return fonction;
+	}
+
+	/**
+	 * @param fonction the fonction to set
+	 */
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
+	}
+
+	/**
+	 * @return the numeroTelephone
+	 */
+	public String getNumeroTelephone() {
+		return numeroTelephone;
+	}
+
+	/**
+	 * @param numeroTelephone the numeroTelephone to set
+	 */
+	public void setNumeroTelephone(String numeroTelephone) {
+		this.numeroTelephone = numeroTelephone;
 	}
 }

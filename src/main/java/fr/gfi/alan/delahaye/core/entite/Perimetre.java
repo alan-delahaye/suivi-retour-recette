@@ -1,20 +1,15 @@
 /**
  * 
  */
-package fr.gfi.alan.delahaye.beans;
-
-import java.io.Serializable;
+package fr.gfi.alan.delahaye.core.entite;
 
 /**
  * @author adelahaye
  *
  */
-public class PerimetreBean implements Serializable {
+public class Perimetre {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5813716829636720633L;
+	private long idPerimetre;
 	
 	/**
 	 * Nom du périmètre
@@ -40,11 +35,17 @@ public class PerimetreBean implements Serializable {
 	 * Ratio de nombre d'anomalies par jour de développement toléré.
 	 */
 	private int ratioDevAnomalie;
+	
+	private Utilisateur utilisateurPrincipaleEnCharge;
+	
 
-	public PerimetreBean() {
+	/**
+	 * Contructeur par défaut 
+	 */
+	public Perimetre() {
 		super();
 	}
-
+	
 	/**
 	 * @param nomPerimetre
 	 * @param chargeInitDeveloppement
@@ -52,7 +53,7 @@ public class PerimetreBean implements Serializable {
 	 * @param chargeRetourRecette
 	 * @param ratioDevAnomalie
 	 */
-	public PerimetreBean(String nomPerimetre, float chargeInitDeveloppement,
+	public Perimetre(String nomPerimetre, float chargeInitDeveloppement,
 			int ratioDevRetourRecette, float chargeRetourRecette,
 			int ratioDevAnomalie) {
 		this.nomPerimetre = nomPerimetre;
@@ -61,7 +62,7 @@ public class PerimetreBean implements Serializable {
 		this.chargeRetourRecette = chargeRetourRecette;
 		this.ratioDevAnomalie = ratioDevAnomalie;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -78,6 +79,20 @@ public class PerimetreBean implements Serializable {
 		builder.append("%");
 		builder.append("]");
 		return builder.toString();
+	}
+
+	/**
+	 * @return the idPerimetre
+	 */
+	public long getIdPerimetre() {
+		return idPerimetre;
+	}
+
+	/**
+	 * @param idPerimetre the idPerimetre to set
+	 */
+	public void setIdPerimetre(long idPerimetre) {
+		this.idPerimetre = idPerimetre;
 	}
 
 	/**
@@ -148,5 +163,20 @@ public class PerimetreBean implements Serializable {
 	 */
 	public void setRatioDevAnomalie(int ratioDevAnomalie) {
 		this.ratioDevAnomalie = ratioDevAnomalie;
+	}
+
+	/**
+	 * @return the utilisateurPrincipaleEnCharge
+	 */
+	public Utilisateur getUtilisateurPrincipaleEnCharge() {
+		return utilisateurPrincipaleEnCharge;
+	}
+
+	/**
+	 * @param utilisateurPrincipaleEnCharge the utilisateurPrincipaleEnCharge to set
+	 */
+	public void setUtilisateurPrincipaleEnCharge(
+			Utilisateur utilisateurPrincipaleEnCharge) {
+		this.utilisateurPrincipaleEnCharge = utilisateurPrincipaleEnCharge;
 	}
 }

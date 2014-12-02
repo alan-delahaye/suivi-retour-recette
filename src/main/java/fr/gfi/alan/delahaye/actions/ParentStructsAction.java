@@ -13,7 +13,6 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import fr.gfi.alan.delahaye.beans.PerimetreBean;
 import fr.gfi.alan.delahaye.beans.UtilisateurBean;
 
 /**
@@ -51,18 +50,18 @@ public abstract class ParentStructsAction extends ActionSupport implements Sessi
 		// TODO:Récupération par un manager
 		tousLesUtilisateurs = new ArrayList<UtilisateurBean>();
 		UtilisateurBean bean = new UtilisateurBean("Defrance", "Vincent",
-				"Chef de Projet");
+				"vincent.defrance@gfi.fr","Chef de Projet","03.03.03.03.03");
 		tousLesUtilisateurs.add(bean);
 		bean = new UtilisateurBean("Delahaye", "Alan",
-				"Responsable Intégration");
+				"alan.delahaye@gfi.fr","Responsable Intégration","03.03.03.03.03");
 		tousLesUtilisateurs.add(bean);
 		bean = new UtilisateurBean("Medjoudj", "Abderezak",
-				"Responsable Développements");
+				"abderezak.medjoudj@gfi.fr","Responsable Développements","03.03.03.03.03");
 		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Collet", "François", "Responsable Recettes");
+		bean = new UtilisateurBean("Collet", "François", "francois.collet@gfi.fr","Responsable Recettes","01.01.01.01.01");
 		tousLesUtilisateurs.add(bean);
 		bean = new UtilisateurBean("Vion", "Jean-François",
-				"Backup Resp. Intégration");
+				"jean-francois.vion@gfi.fr","Backup Resp. Intégration","03.03.03.03.03");
 		tousLesUtilisateurs.add(bean);
 	}
 	
