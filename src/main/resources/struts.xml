@@ -5,60 +5,127 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.ui.theme" value="simple" />
 
-    <package name="myPackage" extends="struts-default">
+	<package name="myPackage" extends="struts-default">
 
-        <default-action-ref name="index" />
+		<default-action-ref name="index" />
 
-        <action name="login" class="fr.gfi.alan.delahaye.actions.LoginAction">
-            <result>/jsp/login.jsp</result>
-        </action>
+		<action name="login" class="fr.gfi.alan.delahaye.actions.LoginAction">
+			<result>/jsp/login.jsp</result>
+		</action>
 
-        <action name="validateLogin" class="fr.gfi.alan.delahaye.actions.ValidateLoginAction">
-            <result name="input">/jsp/login.jsp</result>
-            <result type="redirectAction">dashboard</result>
-        </action>
+		<action name="validateLogin" class="fr.gfi.alan.delahaye.actions.ValidateLoginAction">
+			<result name="input">/jsp/login.jsp</result>
+			<result type="redirectAction">dashboard</result>
+		</action>
 
 		<action name="dashboard" class="fr.gfi.alan.delahaye.actions.tdb.DashboardAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/tdb/dashboard.jsp</result>
-        </action>
-		
-		<action name="administration" class="fr.gfi.alan.delahaye.actions.administration.AdministrationAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/administration/administration.jsp</result>
-        </action>
-		
-		<action name="monCompte" class="fr.gfi.alan.delahaye.actions.administration.MonCompteAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/administration/monCompte.jsp</result>
-        </action>
-        
-        <action name="gestionUtilisateurs" class="fr.gfi.alan.delahaye.actions.administration.GestionUtilisateursAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/administration/gestionUtilisateurs.jsp</result>
-        </action>
-        
-        <action name="gestionPerimetres" class="fr.gfi.alan.delahaye.actions.administration.GestionPerimetresAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/administration/gestionPerimetres.jsp</result>
-        </action>
-        
-        <action name="export" class="fr.gfi.alan.delahaye.actions.administration.ExportAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/administration/export.jsp</result>
-        </action>
-         <action name="perimetre" class="fr.gfi.alan.delahaye.actions.perimetre.PerimetreAction">
-            <result name="login" type="redirectAction">login.do</result>
-            <result>/jsp/perimetre/perimetre.jsp</result>
-        </action>
-		
-		<action name="logout" class="fr.gfi.alan.delahaye.actions.LoginAction" method="deconnexion">
-            <result name="success">/jsp/login.jsp</result>
-        </action>
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/tdb/dashboard.jsp</result>
+		</action>
 
-    </package>
+		<action name="administration"
+			class="fr.gfi.alan.delahaye.actions.administration.AdministrationAction">
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/administration/administration.jsp</result>
+		</action>
+
+		<action name="monCompte"
+			class="fr.gfi.alan.delahaye.actions.administration.MonCompteAction">
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/administration/monCompte.jsp</result>
+		</action>
+
+		<action name="gestionUtilisateurs"
+			class="fr.gfi.alan.delahaye.actions.administration.GestionUtilisateursAction">
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/administration/gestionUtilisateurs.jsp</result>
+		</action>
+		<action name="supprimerUtilisateur" class="fr.gfi.alan.delahaye.actions.administration.GestionUtilisateursAction"
+			method="supprimerUtilisateur">
+			<result name="success" type="redirectAction">gestionUtilisateurs</result>
+		</action>
+		<action name="ajouterUtilisateurs"
+			class="fr.gfi.alan.delahaye.actions.administration.AjouterUtilisateursAction">
+			<result name="input">/jsp/administration/ajouterUtilisateurs.jsp
+			</result>
+			<result>/jsp/administration/ajouterUtilisateurs.jsp</result>
+		</action>
+		<action name="validateUtilisateur"
+			class="fr.gfi.alan.delahaye.actions.administration.validation.ValidateUtilisateurAction">
+			<result name="input" type="chain">ajouterUtilisateurs</result>
+			<result name="monCompte" type="redirectAction">administration</result>
+			<result name="gestionUtilisateur" type="redirectAction">gestionUtilisateurs</result>
+		</action>
+
+		<action name="gestionPerimetres"
+			class="fr.gfi.alan.delahaye.actions.administration.GestionPerimetresAction">
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/administration/gestionPerimetres.jsp</result>
+		</action>
+		<action name="supprimerPerimetre" class="fr.gfi.alan.delahaye.actions.administration.GestionPerimetresAction"
+			method="supprimerPerimetre">
+			<result name="success" type="redirectAction">gestionPerimetres</result>
+		</action>
+		<action name="ajouterPerimetre"
+			class="fr.gfi.alan.delahaye.actions.administration.AjouterPerimetreAction">
+			<result name="input">/jsp/administration/ajouterPerimetre.jsp
+			</result>
+			<result>/jsp/administration/ajouterPerimetre.jsp</result>
+		</action>
+		<action name="validatePerimetre"
+			class="fr.gfi.alan.delahaye.actions.administration.validation.ValidatePerimetreAction">
+			<result name="input" type="chain">ajouterPerimetre</result>
+			<result type="redirectAction">gestionPerimetres</result>
+		</action>
+
+		<action name="export"
+			class="fr.gfi.alan.delahaye.actions.administration.ExportAction">
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/administration/export.jsp</result>
+		</action>
+		<action name="perimetre"
+			class="fr.gfi.alan.delahaye.actions.perimetre.PerimetreAction">
+			<result name="login" type="redirectAction">login.do</result>
+			<result>/jsp/perimetre/perimetre.jsp</result>
+		</action>
+		<action name="supprimerEntreePerimetre" class="fr.gfi.alan.delahaye.actions.perimetre.PerimetreAction"
+			method="supprimerEntreePerimetre">
+			<result name="success" type="redirectAction">gestionUtilisateurs</result>
+		</action>
+		<action name="ajouterEntreePerimetre"
+			class="fr.gfi.alan.delahaye.actions.perimetre.AjouterEntreePerimetreAction">
+			<result name="input">/jsp/perimetre/ajouterEntreePerimetre.jsp
+			</result>
+			<result name="error" type="redirectAction">perimetre</result>
+			<result>/jsp/perimetre/ajouterEntreePerimetre.jsp</result>
+		</action>
+		<action name="validateEntreePerimetre"
+			class="fr.gfi.alan.delahaye.actions.perimetre.validation.ValidateEntreePerimetreAction">
+			<result name="input" type="chain">ajouterEntreePerimetre</result>
+			<result type="chain">perimetre</result>
+		</action>
+		<action name="changeEtatPerimetre"
+			class="fr.gfi.alan.delahaye.actions.perimetre.ChangerEtatPerimetreAction">
+			<result>/jsp/login.jsp</result>
+		</action>
+
+		<action name="logout" class="fr.gfi.alan.delahaye.actions.LoginAction"
+			method="deconnexion">
+			<result name="success">/jsp/login.jsp</result>
+		</action>
+		
+		<action name="download" class="fr.gfi.alan.delahaye.actions.administration.ExportAction">
+			<result name="success" type="stream">
+			  <param name="contentType">image</param>
+			  <param name="inputName">fileInputStream</param>
+			  <param name="contentDisposition">inline;filename="test.jpg"</param>
+			  <param name="bufferSize">1024</param>
+			</result>
+   		</action>
+		
+	</package>
 
 </struts>

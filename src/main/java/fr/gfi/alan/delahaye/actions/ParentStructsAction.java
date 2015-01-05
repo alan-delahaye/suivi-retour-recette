@@ -4,16 +4,22 @@
 package fr.gfi.alan.delahaye.actions;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.gfi.alan.delahaye.beans.PerimetreBean;
 import fr.gfi.alan.delahaye.beans.UtilisateurBean;
+import fr.gfi.alan.delahaye.core.manager.AdministrationManager;
+import fr.gfi.alan.delahaye.core.manager.PerimetreManager;
 
 /**
  * Classe parente de toute les actions struts
@@ -35,6 +41,19 @@ public abstract class ParentStructsAction extends ActionSupport implements Sessi
 	private UtilisateurBean utilisateurBean;
 
 	private List<UtilisateurBean> tousLesUtilisateurs;
+
+	private List<PerimetreBean> tousLesPerimetresEnCours;
+	
+	private String provenance;
+	
+	protected SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	protected SimpleDateFormat sdfGraphe = new SimpleDateFormat("yyyy-MM-dd");
+	
+	@Autowired
+	private AdministrationManager administrationManager;
+	
+	@Autowired
+	private PerimetreManager perimetreManager;
 	
 	@Override
 	public void setSession(Map<String, Object> arg0) {
@@ -44,31 +63,33 @@ public abstract class ParentStructsAction extends ActionSupport implements Sessi
 	protected void init(){
 		initialisationUtilisateurConnecte();
 		initialisationMembreNotification();
+		initialisationPerimetreNotification();
 	}
 	
 	protected void initialisationMembreNotification(){
-		// TODO:Récupération par un manager
-		tousLesUtilisateurs = new ArrayList<UtilisateurBean>();
-		UtilisateurBean bean = new UtilisateurBean("Defrance", "Vincent",
-				"vincent.defrance@gfi.fr","Chef de Projet","03.03.03.03.03");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Delahaye", "Alan",
-				"alan.delahaye@gfi.fr","Responsable Intégration","03.03.03.03.03");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Medjoudj", "Abderezak",
-				"abderezak.medjoudj@gfi.fr","Responsable Développements","03.03.03.03.03");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Collet", "François", "francois.collet@gfi.fr","Responsable Recettes","01.01.01.01.01");
-		tousLesUtilisateurs.add(bean);
-		bean = new UtilisateurBean("Vion", "Jean-François",
-				"jean-francois.vion@gfi.fr","Backup Resp. Intégration","03.03.03.03.03");
-		tousLesUtilisateurs.add(bean);
+		tousLesUtilisateurs = administrationManager.recupererTousLesUtilisateurs();
+	}
+	
+	protected void initialisationPerimetreNotification(){
+		tousLesPerimetresEnCours = perimetreManager.recupererTousLesPerimetresEnCours();
 	}
 	
 	protected void initialisationUtilisateurConnecte(){
 		utilisateurBean = (UtilisateurBean) sessionMap.get("utilisateur");
 	}
 
+	protected void saveActionErrorToSession(){
+		sessionMap.put("ActionError", getActionErrors());
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void retrieveActionErrorToSession(){
+		if(sessionMap.get("ActionError") != null){
+			setActionErrors((Collection<String>) sessionMap.get("ActionError"));
+			sessionMap.remove("ActionError");
+		}
+	}
+	
 	/**
 	 * @return the utilisateurBean
 	 */
@@ -95,5 +116,47 @@ public abstract class ParentStructsAction extends ActionSupport implements Sessi
 	 */
 	public void setTousLesUtilisateurs(List<UtilisateurBean> tousLesUtilisateurs) {
 		this.tousLesUtilisateurs = tousLesUtilisateurs;
+	}
+
+	/**
+	 * @return the provenance
+	 */
+	public String getProvenance() {
+		return provenance;
+	}
+
+	/**
+	 * @param provenance the provenance to set
+	 */
+	public void setProvenance(String provenance) {
+		this.provenance = provenance;
+	}
+	
+	public String getUrlAvatar(){
+		// TODO Structuration properties
+		String url = "file:///C:/fics/ui-danro.jpg";
+		if(utilisateurBean != null && !StringUtils.isEmpty(utilisateurBean.getImageAvatar())){
+			url = utilisateurBean.getImageAvatar();
+		}
+		return url;
+	}
+
+	/**
+	 * @return the tousLesPerimetresEnCours
+	 */
+	public List<PerimetreBean> getTousLesPerimetresEnCours() {
+		return tousLesPerimetresEnCours;
+	}
+
+	/**
+	 * @param tousLesPerimetresEnCours the tousLesPerimetresEnCours to set
+	 */
+	public void setTousLesPerimetresEnCours(
+			List<PerimetreBean> tousLesPerimetresEnCours) {
+		this.tousLesPerimetresEnCours = tousLesPerimetresEnCours;
+	}
+	
+	public int getNbPerimetreEnCours(){
+		return tousLesPerimetresEnCours.size();
 	}
 }

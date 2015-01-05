@@ -100,3 +100,27 @@
 .gritter-light .gritter-title {
     text-shadow: none;
 }
+
+/* for the light (red) version of the gritter notice */
+.gritter-red .gritter-item,
+.gritter-red .gritter-bottom,
+.gritter-red .gritter-top,
+.gritter-red .gritter-close {
+    background-image: url(../images/gritter-red.png);
+    color: #222;
+}
+.gritter-red .gritter-title {
+    text-shadow: none;
+}
+
+/* for the light (green) version of the gritter notice */
+.gritter-green .gritter-item,
+.gritter-green .gritter-bottom,
+.gritter-green .gritter-top,
+.gritter-green .gritter-close {
+    background-image: url(../images/gritter-green.png);
+    color: #222;
+}
+.gritter-green .gritter-title {
+    text-shadow: none;
+}

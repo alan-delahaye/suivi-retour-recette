@@ -5,12 +5,28 @@ package fr.gfi.alan.delahaye.core.entite;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
 /**
  * @author adelahaye
  *
  */
+@Entity
+@NamedQueries({
+	@NamedQuery(name="EntreePerimetre.getLesEntreeParIdPerimetre", query="select e from EntreePerimetre e where e.perimetre.idPerimetre = :idPerimetre"),
+	@NamedQuery(name="EntreePerimetre.getLastEntreeParIdPerimetre", query="select e from EntreePerimetre e where e.perimetre.idPerimetre = :idPerimetre order by e.dateSaisie desc")
+})
 public class EntreePerimetre {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idEntreePerimetre;
 
 	private Date dateSaisie;
@@ -32,6 +48,11 @@ public class EntreePerimetre {
 	private int variation;
 
 	private float chargeRecette;
+	
+	private float rafRecette;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Perimetre perimetre;
 
 	/**
 	 * 
@@ -55,7 +76,7 @@ public class EntreePerimetre {
 	public EntreePerimetre(Date dateSaisie, int stockInitial,
 			int nombreCreation, int nombreRetourKO, int nombreCorrection,
 			int nombreCloture, float chargeTraitement, int stockFinal,
-			int variation, float chargeRecette) {
+			int variation, float chargeRecette, Perimetre perimetre) {
 		this.dateSaisie = dateSaisie;
 		this.stockInitial = stockInitial;
 		this.nombreCreation = nombreCreation;
@@ -66,6 +87,7 @@ public class EntreePerimetre {
 		this.stockFinal = stockFinal;
 		this.variation = variation;
 		this.chargeRecette = chargeRecette;
+		this.perimetre = perimetre;
 	}
 
 	/* (non-Javadoc)
@@ -100,7 +122,9 @@ public class EntreePerimetre {
 		builder.append(variation);
 		builder.append(" anomalie(s), chargeRecette=");
 		builder.append(chargeRecette);
-		builder.append(" j.h]");
+		builder.append(" j.h, ");
+		builder.append(perimetre);
+		builder.append("]");
 		return builder.toString();
 	}
 
@@ -256,5 +280,33 @@ public class EntreePerimetre {
 	 */
 	public void setChargeRecette(float chargeRecette) {
 		this.chargeRecette = chargeRecette;
+	}
+
+	/**
+	 * @return the perimetre
+	 */
+	public Perimetre getPerimetre() {
+		return perimetre;
+	}
+
+	/**
+	 * @param perimetre the perimetre to set
+	 */
+	public void setPerimetre(Perimetre perimetre) {
+		this.perimetre = perimetre;
+	}
+
+	/**
+	 * @return the rafRecette
+	 */
+	public float getRafRecette() {
+		return rafRecette;
+	}
+
+	/**
+	 * @param rafRecette the rafRecette to set
+	 */
+	public void setRafRecette(float rafRecette) {
+		this.rafRecette = rafRecette;
 	}
 }

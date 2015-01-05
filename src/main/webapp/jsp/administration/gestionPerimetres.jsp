@@ -68,21 +68,32 @@
                                   <th>Ratio DEV/retours RE7</th>
                                   <th>Charge retours RE7</th>
                                   <th>Ratio DEV/Anomalie</th>
-                                  <th><button class="btn btn-success btn-xs" style="margin-right:5px;"><i class="fa fa-plus-circle " style="font-size:20px;"></i></button></th>
+                                  <th>Charge init. passage recette</th>
+                                  <th><a href="${ajouterPerimetre}"><button class="btn btn-success btn-xs" style="margin-right:5px;"><i class="fa fa-plus-circle " style="font-size:20px;"></i></button></a></th>
                               </tr>
                               </thead>
                               <tbody>
-                              <tr>
-                                  <td>Lot 3 P4</td>
-                                  <td>100 j.h</td>
-                                  <td>20 %</td>
-                                  <td>20 j.h</td>
-                                  <td>25</td>
-                                  <td>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
+                              <s:iterator value="listePerimetres">
+                              		<s:url id="modifierPerimetre" action="ajouterPerimetre">  
+          								<s:param name="idPerimetre" value="%{idPerimetre}" />  
+       								</s:url>
+       								<s:url id="supprimerPerimetre" action="supprimerPerimetre">
+										<s:param name="idPerimetre" value="%{idPerimetre}" />  
+									</s:url>  
+	                              <tr>
+	                                  <td><s:property value="nomPerimetre"/></td>
+	                                  <td><s:property value="chargeInitDeveloppement"/> j.h</td>
+	                                  <td><s:property value="ratioDevRetourRecette"/> %</td>
+	                                  <td><s:property value="chargeRetourRecette"/> j.h</td>
+	                                  <td><s:property value="ratioDevAnomalie"/> %</td>
+	                                  <td><s:property value="chargePassageRecette"/> j.h</td>
+	                                  <td>
+	                                      <a href="${modifierPerimetre}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+	                                      <a href="${supprimerPerimetre}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
+	                                  </td>
+	                              </tr>
+                              </s:iterator>
+                              
                               </tbody>
                           </table>
 			</div>
@@ -103,88 +114,7 @@
 	
 	</section>
 
-	<!-- js placed at the end of the document so the pages load faster -->
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery-1.8.3.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script class="include" type="text/javascript"
-		src="js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="js/jquery.scrollTo.min.js"></script>
-	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-	<script src="js/jquery.sparkline.js"></script>
-
-
-	<!--common script for all pages-->
-	<script src="js/common-scripts.js"></script>
-
-	<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
-	<script type="text/javascript" src="js/gritter-conf.js"></script>
-
-	<!--script for this page-->
-	<script src="js/sparkline-chart.js"></script>
-	<script src="js/zabuto_calendar.js"></script>
-
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							var unique_id = $.gritter
-									.add({
-										// (string | mandatory) the heading of the notification
-										title : 'Bienvenue sur AGRAF!',
-										// (string | mandatory) the text inside the notification
-										text : 'Ici vous pourrez consulter/saisir le RAF des tâches en cours.',
-										// (string | optional) the image to display on the left
-										image : 'img/ui-sam.jpg',
-										// (bool | optional) if you want it to fade out on its own or just sit there
-										sticky : false,
-										// (int | optional) the time you want it to be alive for before fading out
-										time : '1000',
-										// (string | optional) the class name you want to apply to that specific message
-										class_name : 'my-sticky-class'
-									});
-
-							return false;
-						});
-	</script>
-
-	<script type="application/javascript">
-		
-        $(document).ready(function () {
-            $("#date-popover").popover({html: true, trigger: "manual"});
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });
-        
-            $("#my-calendar").zabuto_calendar({
-                action: function () {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function () {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [
-                    {type: "text", label: "Special event", badge: "00"},
-                    {type: "block", label: "Regular event", }
-                ]
-            });
-        });
-        
-        
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-    
-	</script>
-
+  	<gore:importJS />
 
 </body>
 </html>

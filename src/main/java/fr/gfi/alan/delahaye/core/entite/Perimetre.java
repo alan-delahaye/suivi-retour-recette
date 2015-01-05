@@ -3,12 +3,33 @@
  */
 package fr.gfi.alan.delahaye.core.entite;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+
 /**
  * @author adelahaye
  *
  */
+@Entity
+@NamedQueries({
+	@NamedQuery(name="Perimetre.getPerimetreByNomPerimetre", query="select p from Perimetre p where p.nomPerimetre = :nomPerimetre"),
+	@NamedQuery(name="Perimetre.getPerimetresActif", query="select p from Perimetre p where p.dateDebut is not null and p.dateFin is null")
+})
 public class Perimetre {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idPerimetre;
 	
 	/**
@@ -32,12 +53,25 @@ public class Perimetre {
 	private float chargeRetourRecette;
 	
 	/**
+	 * Charge dédié au passage des plans de tests
+	 */
+	private float chargePassageRecette;
+	
+	/**
 	 * Ratio de nombre d'anomalies par jour de développement toléré.
 	 */
 	private int ratioDevAnomalie;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Utilisateur utilisateurPrincipaleEnCharge;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perimetre")
+	@OrderBy("dateSaisie asc")
+	private List<EntreePerimetre> contenu;
+	
+	private Date dateDebut;
+	
+	private Date dateFin;
 
 	/**
 	 * Contructeur par défaut 
@@ -178,5 +212,61 @@ public class Perimetre {
 	public void setUtilisateurPrincipaleEnCharge(
 			Utilisateur utilisateurPrincipaleEnCharge) {
 		this.utilisateurPrincipaleEnCharge = utilisateurPrincipaleEnCharge;
+	}
+
+	/**
+	 * @return the contenu
+	 */
+	public List<EntreePerimetre> getContenu() {
+		return contenu;
+	}
+
+	/**
+	 * @param contenu the contenu to set
+	 */
+	public void setContenu(List<EntreePerimetre> contenu) {
+		this.contenu = contenu;
+	}
+
+	/**
+	 * @return the dateDebut
+	 */
+	public Date getDateDebut() {
+		return dateDebut;
+	}
+
+	/**
+	 * @param dateDebut the dateDebut to set
+	 */
+	public void setDateDebut(Date dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+
+	/**
+	 * @return the dateFin
+	 */
+	public Date getDateFin() {
+		return dateFin;
+	}
+
+	/**
+	 * @param dateFin the dateFin to set
+	 */
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
+	}
+
+	/**
+	 * @return the chargePassageRecette
+	 */
+	public float getChargePassageRecette() {
+		return chargePassageRecette;
+	}
+
+	/**
+	 * @param chargePassageRecette the chargePassageRecette to set
+	 */
+	public void setChargePassageRecette(float chargePassageRecette) {
+		this.chargePassageRecette = chargePassageRecette;
 	}
 }

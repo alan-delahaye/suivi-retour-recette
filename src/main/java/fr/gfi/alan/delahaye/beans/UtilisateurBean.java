@@ -17,6 +17,8 @@ public class UtilisateurBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1610290526088335208L;
 
+	private long idUtilisateur;
+	
 	/**
 	 * Nom de l'utilisateur
 	 */
@@ -41,6 +43,20 @@ public class UtilisateurBean implements Serializable {
 	 * Numero de téléphone de l'utilisateur
 	 */
 	private String numeroTelephone;
+	
+	private String identifiant;
+	
+	private String imageAvatar;
+	
+	/**
+	 * Premier mot de passe du formulaire
+	 */
+	private String mdp1;
+	
+	/**
+	 * second mot de passe du formulaire (pour vérification)
+	 */
+	private String mdp2;
 	
 	public UtilisateurBean() {
 		super();
@@ -135,5 +151,75 @@ public class UtilisateurBean implements Serializable {
 	 */
 	public void setNumeroTelephone(String numeroTelephone) {
 		this.numeroTelephone = numeroTelephone;
+	}
+
+	/**
+	 * @return the mdp1
+	 */
+	public String getMdp1() {
+		return mdp1;
+	}
+
+	/**
+	 * @param mdp1 the mdp1 to set
+	 */
+	public void setMdp1(String mdp1) {
+		this.mdp1 = mdp1;
+	}
+
+	/**
+	 * @return the mdp2
+	 */
+	public String getMdp2() {
+		return mdp2;
+	}
+
+	/**
+	 * @param mdp2 the mdp2 to set
+	 */
+	public void setMdp2(String mdp2) {
+		this.mdp2 = mdp2;
+	}
+
+	/**
+	 * @return the idUtilisateur
+	 */
+	public long getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+	/**
+	 * @param idUtilisateur the idUtilisateur to set
+	 */
+	public void setIdUtilisateur(long idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
+	}
+
+	/**
+	 * @return the identifiant
+	 */
+	public String getIdentifiant() {
+		return identifiant;
+	}
+
+	/**
+	 * @param identifiant the identifiant to set
+	 */
+	public void setIdentifiant(String identifiant) {
+		this.identifiant = identifiant;
+	}
+
+	/**
+	 * @return the imageAvatar
+	 */
+	public String getImageAvatar() {
+		return imageAvatar;
+	}
+
+	/**
+	 * @param imageAvatar the imageAvatar to set
+	 */
+	public void setImageAvatar(String imageAvatar) {
+		this.imageAvatar = imageAvatar;
 	}
 }

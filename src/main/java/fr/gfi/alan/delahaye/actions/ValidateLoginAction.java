@@ -18,8 +18,10 @@ package fr.gfi.alan.delahaye.actions;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.gfi.alan.delahaye.beans.UtilisateurBean;
+import fr.gfi.alan.delahaye.core.manager.AdministrationManager;
 
 public class ValidateLoginAction extends ParentStructsAction {
     
@@ -34,6 +36,9 @@ public class ValidateLoginAction extends ParentStructsAction {
     private String identifiant;
     
     private UtilisateurBean utilisateurBean;
+    
+    @Autowired
+    private AdministrationManager administrationManager;
     
     public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
     public String getMotDePasse() { return motDePasse; }
@@ -51,8 +56,11 @@ public class ValidateLoginAction extends ParentStructsAction {
     		addActionError("Le mot de passe est obligatoire.");
     	}
     	 // Validation de l'utilisateur et du mot de passe :
-    	if(!hasErrors() && (!"alan".equals(identifiant) || !"alan".equals(motDePasse))){
-    		addActionError("Le couple utilisateur/mot de passe n'est pas correct.");    		
+    	if(!hasErrors()){
+    		UtilisateurBean utilisateurBean = administrationManager.identifierUtilisateur(identifiant, motDePasse);
+    		if(utilisateurBean == null){
+    			addActionError("Le couple utilisateur/mot de passe n'est pas correct.");
+    		}
     	}	
     }
     
@@ -60,14 +68,8 @@ public class ValidateLoginAction extends ParentStructsAction {
     
     public String execute() throws Exception {
     	logger.warn("Phase d'initialisation");
-    	// TODO : Récupérer par un Manager
-    	utilisateurBean = new UtilisateurBean();
-    	utilisateurBean.setNom("Delahaye");
-    	utilisateurBean.setPrenom("Alan");
-    	utilisateurBean.setAdresseMail("alan.delahaye@gfi.fr");
-    	
+    	utilisateurBean = administrationManager.identifierUtilisateur(identifiant, motDePasse);
     	sessionMap.put("utilisateur", utilisateurBean);
-    	
         return SUCCESS;
     }
     

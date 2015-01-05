@@ -7,9 +7,8 @@
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
 
-			<p class="centered">
-				<a href="profile.html"><img src="img/ui-sam.jpg"
-					class="img-circle" width="60"></a>
+			<p class="centered" id="avatarAAfficher">
+				
 			</p>
 			<h5 class="centered">${utilisateurBean.prenom}
 				${utilisateurBean.nom}</h5>
@@ -63,4 +62,4 @@
 		</ul>
 		<!-- sidebar menu end-->
 	</div>
-	</aside> <!--sidebar end--> 
+	</aside> <!--sidebar end-->

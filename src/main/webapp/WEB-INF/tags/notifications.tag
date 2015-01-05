@@ -2,7 +2,7 @@
 <div class="col-lg-3 ds" style="margin-top: 40px;">
 			<!--COMPLETED ACTIONS DONUTS CHART-->
 			<h3>Notifications</h3>
-
+<div style="height:330px; overflow:auto;">
 			<!-- First Action -->
 			<div class="desc">
 				<div class="thumb">
@@ -30,25 +30,27 @@
 					</p>
 				</div>
 			</div>
-
+</div>
 			<!-- USERS ONLINE SECTION -->
 			<h3>Membres de l'équipe</h3>
-			<!-- First Member -->
-			<s:iterator value="tousLesUtilisateurs">
-				<div class="desc">
-					<div class="thumb">
-						<img class="img-circle" src="img/ui-sam.jpg" width="35px"
-							height="35px" align="">
+			<div style="height:330px; overflow:auto;">
+				<!-- First Member -->
+				<s:iterator value="tousLesUtilisateurs">
+					<div class="desc">
+						<div class="thumb">
+							<img class="img-circle" src="img/ui-sam.jpg" width="35px"
+								height="35px" align="">
+						</div>
+						<div class="details">
+							<p>
+								<a><s:property value="nom" /> <s:property value="prenom" /></a><br />
+								<muted>
+								<s:property value="adresseMail" /></muted>
+							</p>
+						</div>
 					</div>
-					<div class="details">
-						<p>
-							<a><s:property value="nom" /> <s:property value="prenom" /></a><br />
-							<muted>
-							<s:property value="adresseMail" /></muted>
-						</p>
-					</div>
-				</div>
-			</s:iterator>
+				</s:iterator>
+			</div>
 		</div>
 		<!-- /col-lg-3 -->
 	</div>

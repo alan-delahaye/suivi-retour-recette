@@ -29,6 +29,8 @@ public class GestionUtilisateursAction extends ParentStructsAction {
 
 	private List<UtilisateurBean> lesUtilisateurs;
 	
+	private int idUtilisateur;
+	
 	@Autowired
 	private AdministrationManager administrationManager;
 	
@@ -38,11 +40,15 @@ public class GestionUtilisateursAction extends ParentStructsAction {
 		if (getUtilisateurBean() == null) {
 			return LOGIN;
 		}
-		// TODO:Récupération par un manager
 		lesUtilisateurs = administrationManager.recupererTousLesUtilisateurs();
 		return SUCCESS;
 	}
 
+	public String supprimerUtilisateur() throws Exception {
+		administrationManager.supprimerUtilisateur(idUtilisateur);
+        return SUCCESS;
+    }
+	
 	/**
 	 * @return the lesUtilisateurs
 	 */
@@ -55,5 +61,19 @@ public class GestionUtilisateursAction extends ParentStructsAction {
 	 */
 	public void setLesUtilisateurs(List<UtilisateurBean> lesUtilisateurs) {
 		this.lesUtilisateurs = lesUtilisateurs;
+	}
+
+	/**
+	 * @return the idUtilisateur
+	 */
+	public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+	/**
+	 * @param idUtilisateur the idUtilisateur to set
+	 */
+	public void setIdUtilisateur(int idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
 	}
 }
