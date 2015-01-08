@@ -48,6 +48,7 @@ public abstract class ParentStructsAction extends ActionSupport implements Sessi
 	
 	protected SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	protected SimpleDateFormat sdfGraphe = new SimpleDateFormat("yyyy-MM-dd");
+	protected SimpleDateFormat sdfEdition = new SimpleDateFormat("ddMMyyyy");
 	
 	@Autowired
 	private AdministrationManager administrationManager;

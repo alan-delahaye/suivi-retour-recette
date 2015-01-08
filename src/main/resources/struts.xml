@@ -117,11 +117,11 @@
 			<result name="success">/jsp/login.jsp</result>
 		</action>
 		
-		<action name="download" class="fr.gfi.alan.delahaye.actions.administration.ExportAction">
+		<action name="download" class="fr.gfi.alan.delahaye.actions.administration.ExportAction" method="dowloadFic">
 			<result name="success" type="stream">
-			  <param name="contentType">image</param>
+			  <param name="contentType">application/octet-stream</param>
 			  <param name="inputName">fileInputStream</param>
-			  <param name="contentDisposition">inline;filename="test.jpg"</param>
+			  <param name="contentDisposition">attachment;filename="${nomFichier}.xls"</param>
 			  <param name="bufferSize">1024</param>
 			</result>
    		</action>

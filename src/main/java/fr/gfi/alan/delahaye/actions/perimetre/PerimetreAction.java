@@ -3,7 +3,6 @@
  */
 package fr.gfi.alan.delahaye.actions.perimetre;
 
-import java.io.EOFException;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -11,11 +10,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.gfi.alan.delahaye.actions.ParentStructsAction;
-import fr.gfi.alan.delahaye.actions.administration.AdministrationAction;
 import fr.gfi.alan.delahaye.beans.EntreePerimetreBean;
 import fr.gfi.alan.delahaye.beans.PerimetreBean;
 import fr.gfi.alan.delahaye.core.manager.AdministrationManager;
 import fr.gfi.alan.delahaye.core.manager.PerimetreManager;
+import fr.gfi.alan.delahaye.utils.FloatUtils;
 
 /**
  * @author adelahaye
@@ -28,7 +27,7 @@ public class PerimetreAction extends ParentStructsAction {
 	 */
 	private static final long serialVersionUID = -8869473766917398137L;
 
-	private Logger logger = LogManager.getLogger(AdministrationAction.class);
+	private Logger logger = LogManager.getLogger(PerimetreAction.class);
 	
 	@Autowired
 	private AdministrationManager administrationManager;
@@ -264,23 +263,23 @@ public class PerimetreAction extends ParentStructsAction {
 	}
 
 	public String getRafImmediat(){
-		return Float.toString(rafImmediat);
+		return Float.toString(FloatUtils.arrondir(rafImmediat));
 	}
 	
 	public String getRafProjection(){
-		return Float.toString(rafProjection);
+		return Float.toString(FloatUtils.arrondir(rafProjection));
 	}
 	
 	public String getVariationCharge(){
-		return Float.toString(variation);
+		return Float.toString(FloatUtils.arrondir(variation));
 	}
 	
 	public String getNombreMoyenTraitement(){
-		return Float.toString(tempsMoyenTraitement);
+		return Float.toString(FloatUtils.arrondir(tempsMoyenTraitement));
 	}
 
 	public String getNombreMoyenCreation(){
-		return Float.toString(nombreMoyenCreation);
+		return Float.toString(FloatUtils.arrondir(nombreMoyenCreation));
 	}
 	
 	public String getRatioDevAnomalie(){

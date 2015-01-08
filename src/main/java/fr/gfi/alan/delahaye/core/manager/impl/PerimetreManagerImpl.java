@@ -68,9 +68,11 @@ public class PerimetreManagerImpl extends ObjectMapper implements
 			bean.setRafPassage(entreePerimetre.getRafRecette());
 		}
 		int nombreTotalAno = 0;
+		int nombreTotalAnoSansRegul = 0;
 		int nombreCorrigee = 0;
 		if(bean.getContenu() != null){
 			for(EntreePerimetreBean entreePerimetreBean : bean.getContenu()){
+				nombreTotalAnoSansRegul += entreePerimetreBean.getNombreCreation();
 				nombreTotalAno += entreePerimetreBean.getNombreCreation();
 				nombreTotalAno -= entreePerimetreBean.getNombreCloture();
 				
@@ -78,7 +80,7 @@ public class PerimetreManagerImpl extends ObjectMapper implements
 				nombreCorrigee -= entreePerimetreBean.getNombreRetourKO();
 				
 			}
-			
+			bean.setNombreAnoSansRegul(nombreTotalAnoSansRegul);
 			bean.setNombreAnoTotal(nombreTotalAno);
 			bean.setNombreAnoCorrigee(nombreCorrigee);
 			if((bean.getNombreAnoTotal()-bean.getNombreAnoCorrigee()) != entreePerimetre.getStockFinal()){
@@ -289,8 +291,29 @@ public class PerimetreManagerImpl extends ObjectMapper implements
 			int avancement = 0;
 			if(entreePerimetre != null){
 				avancement = (int) (100 - ((entreePerimetre.getRafRecette()/bean.getChargePassageRecette())*100));
+				bean.setRafPassage(entreePerimetre.getRafRecette());
 			}
 			bean.setAvancement(avancement);
+			
+			int nombreTotalAno = 0;
+			int nombreCorrigee = 0;
+			if(bean.getContenu() != null){
+				for(EntreePerimetreBean entreePerimetreBean : bean.getContenu()){
+					nombreTotalAno += entreePerimetreBean.getNombreCreation();
+					nombreTotalAno -= entreePerimetreBean.getNombreCloture();
+					
+					nombreCorrigee += entreePerimetreBean.getNombreCorrection();
+					nombreCorrigee -= entreePerimetreBean.getNombreRetourKO();
+					
+				}
+				
+				bean.setNombreAnoTotal(nombreTotalAno);
+				bean.setNombreAnoCorrigee(nombreCorrigee);
+				if((bean.getNombreAnoTotal()-bean.getNombreAnoCorrigee()) != entreePerimetre.getStockFinal()){
+					logger.error("Il y a une incohérence : [nombreTotalAno : " + bean.getNombreAnoTotal() 
+							+ ", nombreAnoCorrigee : "+bean.getNombreAnoCorrigee()+", stockFinal : "+entreePerimetre.getStockFinal()+"]");
+				}
+			}
 			retour.add(bean);
 		}
 		return retour;

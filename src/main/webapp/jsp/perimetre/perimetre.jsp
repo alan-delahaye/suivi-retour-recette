@@ -86,7 +86,10 @@
 			
 			<s:if test="perimetreBean.idPerimetre > 0">
 				<div class="row">
-					<h1 style="text-align:center;">${perimetreBean.nomPerimetre}</h1>
+					<s:url id="fileDownload" namespace="/" action="download" >  
+          				<s:param name="idPerimetre" value="perimetreBean.idPerimetre" />  
+       				</s:url> 				
+					<h1 style="text-align:center;">${perimetreBean.nomPerimetre} <a href="${fileDownload}"><button class="fa fa-download" style="color:darkorange;"></button></a></h1>
 					<!-- TWITTER PANEL -->
 					<div class="col-md-4 mb">
 						<div class="darkblue-panel pn">
@@ -149,9 +152,17 @@
 							<div class="darkblue-header">
 								<h5>Statistiques</h5>
 							</div><br /><br />
-							<h5 style="font-weight:700;">Nombre d'anomalies créées (par jour) : ${nombreMoyenTraitement}</h5>
-							<h5 style="font-weight:700;">Nombre d'anomalies corrigées (par jour) : ${nombreMoyenCreation}</h5>
-							<h5 style="font-weight:700;">Ratio DEV/Anomalies : ${ratioDevAnomalie}</h5>
+							<h5 style="font-weight:700;">Nombre d'anomalies créées (par jour) : ${nombreMoyenTraitement} anomalie(s)</h5>
+							<h5 style="font-weight:700;">Nombre d'anomalies corrigées (par jour) : ${nombreMoyenCreation} anomalie(s)</h5>
+							<h5 style="font-weight:700;">Ratio DEV/Anomalies : 
+							<s:if test="ratioDevAnomalie > perimetreBean.ratioDevAnomalie">
+								<span style="color:#FF6C60">${ratioDevAnomalie} %</span>
+							<s:else>
+								${ratioDevAnomalie} %
+							</s:else>
+							</s:if>
+							
+							</h5>
 						</div>
 					</div>
 					<!-- /col-md-4 -->
@@ -159,9 +170,19 @@
 					<div class="col-md-4 col-sm-4 mb">
 						<div class="steps pn">
 						    <input type='submit' value='Projection' id='submit'/>
-						    <label>RAF (immédiat) : ${rafImmediat}</label>
-						    <label>RAF (projection) : ${rafImmediat}</label>
-						    <label>Variation : <span>${variationCharge}</span></label>
+						    <label>RAF (immédiat) : ${rafImmediat} j.h</label>
+						    <label>RAF (projection) : ${rafImmediat} j.h</label>
+						    <label>Variation : 
+						    <s:if test="variationCharge > 0">
+								<span style="color:#FF6C60">${variationCharge} j.h</span>
+							</s:if>
+							<s:if test="variationCharge < 0">
+								<span style="color:#A9D86E">${variationCharge} j.h</span>
+							</s:if>
+							<s:if test="variationCharge == 0">
+								<span>${variationCharge} j.h</span>
+							</s:if>
+						    </label>
 						</div>
 					</div>
 					<!-- /col-md-4 -->

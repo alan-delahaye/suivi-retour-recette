@@ -60,7 +60,9 @@
 			<div class="row mtbox">
 				<p> Ecran Export, en cours de création</p>
 				
-				<s:url id="fileDownload" namespace="/" action="download" ></s:url>
+				<s:url id="fileDownload" namespace="/" action="download" >
+					<s:param name="idPerimetre" value="1"></s:param>
+				</s:url>
  
 					<h4>Download file - <s:a href="%{fileDownload}">fileABC.txt</s:a></h4>
 			</div>
