@@ -22,7 +22,7 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<apache.poi.version>3.11</apache.poi.version>
 		<mysql-version>5.1.34</mysql-version>
-		<hibernate-version>3.2.6.GA</hibernate-version>
+		<hibernate-version>3.2.6.ga</hibernate-version>
 		<hibernate-annotations-version>3.3.1.GA</hibernate-annotations-version>
 		<hibernate-entitymanager-version>3.3.2.GA</hibernate-entitymanager-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
