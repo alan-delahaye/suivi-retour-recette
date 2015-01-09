@@ -171,7 +171,7 @@
 						<div class="steps pn">
 						    <input type='submit' value='Projection' id='submit'/>
 						    <label>RAF (immédiat) : ${rafImmediat} j.h</label>
-						    <label>RAF (projection) : ${rafImmediat} j.h</label>
+						    <label>RAF (projection) : ${rafProjection} j.h</label>
 						    <label>Variation : 
 						    <s:if test="variationCharge > 0">
 								<span style="color:#FF6C60">${variationCharge} j.h</span>
