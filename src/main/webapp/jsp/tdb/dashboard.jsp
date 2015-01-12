@@ -59,30 +59,55 @@
 
 			<div class="row mt">
 				<s:iterator value="tousLesPerimetresEnCours">
-					<div class="col-md-4 col-sm-4 mb">
+						<div class="col-md-4 col-sm-4 mb">
                       		<div class="grey-panel pn donut-chart">
                       			<div class="grey-header">
 						  			<h5><s:property value="nomPerimetre"/> </h5>
                       			</div>
-                      			<canvas id="serverstatus01" height="120" width="120"></canvas>
-								<script>
-									var doughnutData = [
-											{
-												value: 70,
-												color:"#FF6B6B"
-											},
-											{
-												value : 30,
-												color : "#fdfdfd"
-											}
-										];
-										var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
-								</script>
-								<h3>Stock : <s:property value="%{nombreAnoTotal - nombreAnoCorrigee}" /></h3>
-								<h3>Nombre total d'anomalies : <s:property value="nombreAnoTotal" /></h3>
-								<h3>Test h3</h3>
-								<h4>Test h4</h4>
-								<h5>Test h5</h5>
+                      		
+                      		<div class="task-info">
+                      			<div class="desc">Avancement : <s:property value="avancement" />%</div>
+							</div>
+							<div class="progress progress-striped">
+								<div class="progress-bar progress-bar-success" role="progressbar"
+									aria-valuenow="${avancement}" aria-valuemin="0" aria-valuemax="100"
+									style="width: ${avancement}%">
+									<span class="sr-only">${avancement}% Complete</span>
+								</div>
+							</div>
+							
+							<div class="task-info">
+								<div class="percent">Stock Actuel : ${nombreAnoTotal - nombreAnoCorrigee} anomalie(s)</div>
+							</div>
+							<div class="progress progress-striped">
+								<div class="progress-bar progress-bar-success" role="progressbar"
+									aria-valuenow="${(nombreAnoCorrigee*100) / nombreAnoTotal}" aria-valuemin="0" aria-valuemax="100"
+									style="width: ${(nombreAnoCorrigee*100) / nombreAnoTotal}%">
+									<span class="sr-only">${(nombreAnoCorrigee*100) / nombreAnoTotal}% Complete</span>
+								</div>
+							</div>
+							
+							<div class="task-info">
+								<div class="percent">Conso. traitement : ${nombreTotalConsoTraitement} j.h</div>
+							</div>
+							<s:if test="nombreTotalConsoTraitement > chargeRetourRecette">
+								<div class="progress progress-striped">
+										<div class="progress-bar progress-bar-danger" role="progressbar"
+											aria-valuenow="${(nombreTotalConsoTraitement*100) / chargeRetourRecette}" aria-valuemin="0" aria-valuemax="100"
+											style="width: ${(nombreTotalConsoTraitement*100) / chargeRetourRecette}%">
+											<span class="sr-only">${(nombreTotalConsoTraitement*100) / chargeRetourRecette}% Complete</span>
+										</div>
+									</div>
+							</s:if>
+							<s:if test="nombreTotalConsoTraitement <= chargeRetourRecette">
+								<div class="progress progress-striped">
+									<div class="progress-bar progress-bar-success" role="progressbar"
+										aria-valuenow="${(nombreTotalConsoTraitement*100) / chargeRetourRecette}" aria-valuemin="0" aria-valuemax="100"
+										style="width: ${(nombreTotalConsoTraitement*100) / chargeRetourRecette}%">
+										<span class="sr-only">${(nombreTotalConsoTraitement*100) / chargeRetourRecette}% Complete</span>
+									</div>
+								</div>
+							</s:if>
 	                      	</div><! --/grey-panel -->
                       	</div><!-- /col-md-4-->
 				</s:iterator>

@@ -70,6 +70,7 @@ public class PerimetreManagerImpl extends ObjectMapper implements
 		int nombreTotalAno = 0;
 		int nombreTotalAnoSansRegul = 0;
 		int nombreCorrigee = 0;
+		float chargeConso = 0;
 		if(bean.getContenu() != null){
 			for(EntreePerimetreBean entreePerimetreBean : bean.getContenu()){
 				nombreTotalAnoSansRegul += entreePerimetreBean.getNombreCreation();
@@ -79,10 +80,12 @@ public class PerimetreManagerImpl extends ObjectMapper implements
 				nombreCorrigee += entreePerimetreBean.getNombreCorrection();
 				nombreCorrigee -= entreePerimetreBean.getNombreRetourKO();
 				
+				chargeConso += entreePerimetreBean.getChargeTraitement();
 			}
 			bean.setNombreAnoSansRegul(nombreTotalAnoSansRegul);
 			bean.setNombreAnoTotal(nombreTotalAno);
 			bean.setNombreAnoCorrigee(nombreCorrigee);
+			bean.setNombreTotalConsoTraitement(chargeConso);
 			if((bean.getNombreAnoTotal()-bean.getNombreAnoCorrigee()) != entreePerimetre.getStockFinal()){
 				logger.error("Il y a une incohérence : [nombreTotalAno : " + bean.getNombreAnoTotal() 
 						+ ", nombreAnoCorrigee : "+bean.getNombreAnoCorrigee()+", stockFinal : "+entreePerimetre.getStockFinal()+"]");
@@ -297,18 +300,25 @@ public class PerimetreManagerImpl extends ObjectMapper implements
 			
 			int nombreTotalAno = 0;
 			int nombreCorrigee = 0;
+			float chargeConso = 0;
+			int nombreTotalAnoSansRegul = 0;
 			if(bean.getContenu() != null){
 				for(EntreePerimetreBean entreePerimetreBean : bean.getContenu()){
+					
+					nombreTotalAnoSansRegul += entreePerimetreBean.getNombreCreation();
 					nombreTotalAno += entreePerimetreBean.getNombreCreation();
 					nombreTotalAno -= entreePerimetreBean.getNombreCloture();
 					
 					nombreCorrigee += entreePerimetreBean.getNombreCorrection();
 					nombreCorrigee -= entreePerimetreBean.getNombreRetourKO();
 					
+					chargeConso += entreePerimetreBean.getChargeTraitement();
 				}
-				
+				bean.setNombreAnoSansRegul(nombreTotalAnoSansRegul);
 				bean.setNombreAnoTotal(nombreTotalAno);
 				bean.setNombreAnoCorrigee(nombreCorrigee);
+				bean.setNombreTotalConsoTraitement(chargeConso);
+				
 				if((bean.getNombreAnoTotal()-bean.getNombreAnoCorrigee()) != entreePerimetre.getStockFinal()){
 					logger.error("Il y a une incohérence : [nombreTotalAno : " + bean.getNombreAnoTotal() 
 							+ ", nombreAnoCorrigee : "+bean.getNombreAnoCorrigee()+", stockFinal : "+entreePerimetre.getStockFinal()+"]");

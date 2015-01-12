@@ -87,6 +87,8 @@ public class PerimetreBean implements Serializable {
 	private int nombreAnoCorrigee;
 	
 	private int nombreAnoSansRegul;
+	
+	private float nombreTotalConsoTraitement;
 
 	public PerimetreBean() {
 		super();
@@ -406,5 +408,19 @@ public class PerimetreBean implements Serializable {
 	 */
 	public void setNombreAnoSansRegul(int nombreAnoSansRegul) {
 		this.nombreAnoSansRegul = nombreAnoSansRegul;
+	}
+
+	/**
+	 * @return the nombreTotalConsoTraitement
+	 */
+	public float getNombreTotalConsoTraitement() {
+		return nombreTotalConsoTraitement;
+	}
+
+	/**
+	 * @param nombreTotalConsoTraitement the nombreTotalConsoTraitement to set
+	 */
+	public void setNombreTotalConsoTraitement(float nombreTotalConsoTraitement) {
+		this.nombreTotalConsoTraitement = nombreTotalConsoTraitement;
 	}
 }
